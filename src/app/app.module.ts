@@ -4,10 +4,14 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { PostsComponent } from './posts/posts.component';
+import { SearchComponent } from './search/search.component';
+import { PostsService } from './services/posts.service'
+import { SubsService } from './services/subs.service'
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
-  /*{ path: 'foo', component: FooComponent },
-  { path: '', redirectTo: '/foo', pathMatch: 'full' },*/
+  { path: '', component: PostsComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -15,12 +19,19 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
 	AppComponent,
-	PageNotFoundComponent
+	PageNotFoundComponent,
+	PostsComponent,
+	SearchComponent
     ],
     imports: [
 	BrowserModule,
 	RouterModule.forRoot(appRoutes,{ enableTracing: true } ),
-	BrowserAnimationsModule
+	BrowserAnimationsModule,
+	HttpClientModule
+    ],
+    providers: [
+	PostsService,
+	SubsService
     ],
     bootstrap: [AppComponent]
 })
